@@ -1,15 +1,18 @@
 import { currencyPairs } from "../common/utilities";
 import Button from '@mui/material/Button';
-
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 const Body = () => {
+  const navigate = useNavigate();
 
+  let pair1, pair2
 
-  let pair1, pair2;
+  function handleOnClickTrack() {
+    
+    navigate('/track', {state:{pair1, pair2}});
 
-  function handleOnClickTrack(){
-    console.log("PAIR1:",pair1,"PAIR2:",pair2)
   }
 
   function handleOnChangeEventPair1(e) {
@@ -43,10 +46,12 @@ const Body = () => {
               </option>
             ))}
           </select>
-          
+
 
         </div>
-        <Button variant="contained" color="primary" onClick={handleOnClickTrack}>Track</Button>
+        <Button variant="contained" color="primary" onClick={handleOnClickTrack}>
+          <Link to='/track'>Track</Link>
+        </Button>
       </div>
 
     </main>

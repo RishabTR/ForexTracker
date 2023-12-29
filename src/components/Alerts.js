@@ -1,5 +1,0 @@
-const Alert =() =>{
-    function errorOnSelectingPair(){
-        
-    }
-}

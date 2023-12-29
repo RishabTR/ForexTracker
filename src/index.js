@@ -7,26 +7,40 @@ import {createBrowserRouter,RouterProvider} from 'react-router-dom';
 import About from './components/RoutePages/About';
 import Help from './components/RoutePages/Help';
 import Contact from './components/RoutePages/Contact';
-
-
+import Error from './components/Error';
+import Body from './components/Body';
+import Track from './components/RoutePages/Track';
 
 const appRouter = createBrowserRouter([
   {
     path:'/',
     element:<App/>,
+    errorElement:<Error/>,
+    children:[
+      {
+        path:'/',
+        element:<Body/>
+      },
+      {
+        path:'/about',
+        element:<About/>,
+      },
+      {
+        
+        path:'/Contact',
+        element:<Contact/>,
+      },
+      {
+        path:'/help',
+        element:<Help/>,
+      },
+      {
+        path:'/track',
+        element:<Track/>
+      }
+    ]
   },
-  {
-    path:'/about',
-    element:<About/>,
-  },
-  {
-    path:'/help',
-    element:<Help/>,
-  },
-  {
-    path:'/Contact',
-    element:<Contact/>,
-  }
+   
 ]);
 
 
