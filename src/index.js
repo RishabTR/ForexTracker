@@ -10,6 +10,7 @@ import Contact from './components/RoutePages/Contact';
 import Error from './components/Error';
 import Body from './components/Body';
 import Track from './components/RoutePages/Track';
+import Output from './components/RoutePages/Output';
 
 const appRouter = createBrowserRouter([
   {
@@ -36,11 +37,13 @@ const appRouter = createBrowserRouter([
       },
       {
         path:'/track',
-        element:<Track/>
-      },
-      {
-        path:'/track/:pair1/:pair2',
-        element:<Track/>
+        element:<Track/>,
+        children:[
+          {
+            path:'output',
+            element:<Output/>
+          }
+        ]
       }
     ]
   },
