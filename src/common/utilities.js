@@ -1,3 +1,3 @@
 
-export const currencyPairs = ['Select Any','EUR', 'USD', 'GBP']
+export const currencyPairs = ['EUR', 'USD', 'GBP']
 

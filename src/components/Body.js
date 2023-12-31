@@ -1,45 +1,81 @@
 import { currencyPairs } from "../common/utilities";
 import Button from '@mui/material/Button';
-import { Link } from "react-router-dom";
+import { useState,useEffect } from "react";
+// import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+
 
 
 const Body = () => {
   const navigate = useNavigate();
 
-  let pair1, pair2
-
+  const [pair1, selectPair1] = useState('');
+  const [pair2, selectPair2] = useState('');
   function handleOnClickTrack() {
-    
-    navigate('/track', {state:{pair1, pair2}});
+
+
+    if ((pair1 !== '' && pair2 !== '') && pair1 !== pair2) {
+      navigate(`/track/${pair1}/${pair2}`, { state: { pair1, pair2 } });
+    }
+    else {
+      if (pair1 === '' || pair2 === '') {
+        alert('Select any pair!!')
+      }
+      else {
+        alert('Avoid Same pairs')
+      }
+
+    }
+
 
   }
 
-  function handleOnChangeEventPair1(e) {
-    pair1 = e.target.value;
-  }
-  function handleOnChangeEventPair2(e) {
-    pair2 = e.target.value;
+  useEffect(()=>{
+    console.log("Learning useEffect Hook");
+  },[])
+
+  const fetchData=async () =>{
+    const data =await fetch(
+    " https://marketdata.tradermade.com/api/v1/live?api_key=H_3jbDkH3vIHOZ02lPND&currency=USDEUR"
+    );
+
+    const json = await data.json();
+
+    console.log(json)
   }
 
+  
+
+
+  function selectedPair1(e) {
+    selectPair1(e.target.value);
+
+  }
+  function selectedPair2(e) {
+    selectPair2(e.target.value);
+
+  }
+
+  
 
   return (
-
     <main>
       <div className="container">
         <h1>Forex Tracker</h1>
         <h3>Track live forex prices for your selected currency pairs.</h3>
 
         <div className="search-bar">
-
-          <select onChange={handleOnChangeEventPair1}>
+          <select onChange={selectedPair1} value={pair1 || ''}>
+            <option value="" disabled>Select Pair 1</option>
             {currencyPairs.map(pair => (
               <option key={pair} value={pair}>
                 {pair}
               </option>
             ))}
           </select>
-          <select onChange={handleOnChangeEventPair2}>
+          <select onChange={selectedPair2} value={pair2 || ''}>
+            <option value="" disabled>Select Pair 2</option>
+
             {currencyPairs.map(pair => (
               <option key={pair} value={pair}>
                 {pair}
@@ -49,10 +85,11 @@ const Body = () => {
 
 
         </div>
-        <Button variant="contained" color="primary" onClick={handleOnClickTrack}>
-          <Link to='/track'>Track</Link>
-        </Button>
+
+        <Button variant="contained" color="primary" onClick={handleOnClickTrack}>Track</Button>
+
       </div>
+
 
     </main>
   );

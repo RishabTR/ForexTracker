@@ -37,6 +37,10 @@ const appRouter = createBrowserRouter([
       {
         path:'/track',
         element:<Track/>
+      },
+      {
+        path:'/track/:pair1/:pair2',
+        element:<Track/>
       }
     ]
   },

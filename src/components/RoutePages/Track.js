@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 const Track = () => {
 
     const location = useLocation();
-    const { pair1, pair2 } = location.state;
+    const { pair1, pair2 } = location.state || {};
   
     return(
         <>
